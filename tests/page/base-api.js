@@ -12,6 +12,7 @@ const baseAPI = axios.create({
     validateStatus : function () {
         return true
     }
+    
 })
 
 export default baseAPI;

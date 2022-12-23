@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "API Automation",
   "main": "index.js",
-  "author": "Herdian Chandra, Joana",
+  "author": "Herdian Chandra, Joanna",
   "license": "MIT",
   "dependencies": {
     "axios": "^1.2.1",
@@ -16,7 +16,7 @@
   "scripts": {
     "postinstall": "link-module-alias",
     "preinstall": "command -v link-module-alias && link-module-alias clean || true",
-    "mocha:run": "mocha tests/scenarios --reporter-options resportDir=reports"
+    "mocha:run": "mocha tests/scenarios --reporter-options resportDir=reports --timeout=10000"
   },
   "_moduleAliases": {
     "$root": "tests",

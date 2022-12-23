@@ -18,7 +18,7 @@ export const ERROR_INVALID_CREATE_TOKEN = {
 }
 
 export const CREATE_BOOKING = {
-    "firstname" : "Joana",
+    "firstname" : "Joanna",
     "lastname" : "",
     "totalprice" : 455,
     "depositpaid" : true,
