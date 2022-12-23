@@ -19,7 +19,7 @@ describe("RESTFUL BOOKER END TO END", () => {
         token = responseCreateToken.data.token;
     })
 
-    it("Ensure CREATE TOKEN API whitout username is failed", async () => {
+    it("Ensure CREATE TOKEN API without username is failed", async () => {
         const responseCreateToken = await restfulBooker.createToken(data.INVALID_CREATE_TOKEN_WITHOUT_USERNAME);
 
         assert.equal(responseCreateToken.status, 200);
@@ -27,7 +27,7 @@ describe("RESTFUL BOOKER END TO END", () => {
         assert.equal(responseCreateToken.data.reason, data.ERROR_INVALID_CREATE_TOKEN.reason);
     })
 
-    it("Ensure CREATE TOKEN API whitout username is failed", async () => {
+    it("Ensure CREATE TOKEN API without username is failed", async () => {
         const responseCreateToken = await restfulBooker.createToken(data.INVALID_CREATE_TOKEN_WITHOUT_PASSWORD);
 
         assert.equal(responseCreateToken.status, 200);
@@ -63,8 +63,5 @@ describe("RESTFUL BOOKER END TO END", () => {
     /*
         Update Booking
     */
-   it("Ensure UPDATE BOOKING API is working", async () => {
-        
-   })
 
 })
