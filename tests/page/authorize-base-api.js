@@ -15,7 +15,7 @@ const authorizeBaseAPI = async () => {
       "Content-Type": "application/json",
       Accept: "*/*",
       Cookie: `token=${responseCreateToken.data.token}`,
-      Authorization: "YWRtaW46cGFzc3dvcmQxMjM=]",
+      Authorization: `Bearer ${responseCreateToken.data.token}`,
     },
     validateStatus: function () {
       return true;

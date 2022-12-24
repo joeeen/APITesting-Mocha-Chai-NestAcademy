@@ -8,8 +8,12 @@ const restfulBooker = {
   getBookingByFirstName: (firstName) =>
     baseAPI.get("/booking/?firstname=" + firstName),
   pingCheck: () => baseAPI.get("/ping"),
-  updateBooking: async (param, data) => (await authorizeBaseAPI()).put("/booking/" + param, data),
-  deleteBooking: (param) => baseAPI.delete("/booking" + param),
+  updateBooking: async (param, data) =>
+    (await authorizeBaseAPI()).put("/booking/" + param, data),
+  updateBookingwithouttoken: (param, data) =>
+    baseAPI.put("/booking/" + param, data),
+  deleteBooking: async (param) =>
+    (await authorizeBaseAPI()).delete("/booking/" + param),
 };
 
 export default restfulBooker;
