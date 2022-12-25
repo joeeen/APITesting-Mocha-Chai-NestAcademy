@@ -7,15 +7,18 @@ describe("RESTFUL BOOKER END TO END", () => {
   var bookingId;
   var firstName;
 
-  // Ping Check
+  /**
+   * Ping Check
+   */
   it("Ensure PING CHECK API is running", async () => {
     const responsePingCheck = await restfulBooker.pingCheck();
     assert.equal(responsePingCheck.status, 201);
     assert.equal(responsePingCheck.data, "Created");
   });
-  /*
-        Create Token
-    */ 5;
+
+  /**
+   * Create Token
+   */
   it("Ensure CREATE TOKEN API is successfully working", async () => {
     const responseCreateToken = await restfulBooker.createToken(
       data.VALID_CREATE_TOKEN
@@ -29,7 +32,7 @@ describe("RESTFUL BOOKER END TO END", () => {
   });
 
     it("Ensure CREATE TOKEN API without username is failed", async () => {
-        const responseCreateToken = await restfulBooker.createToken(data.INVALID_CREATE_TOKEN_WITHOUT_USERNAME);
+    const responseCreateToken = await restfulBooker.createToken(data.INVALID_CREATE_TOKEN_WITHOUT_USERNAME);
 
     assert.equal(responseCreateToken.status, 200);
     assert.containsAllKeys(responseCreateToken.data, ["reason"]);
@@ -50,13 +53,11 @@ describe("RESTFUL BOOKER END TO END", () => {
     );
   });
 
-  /*
-        Create Booking
-    */
+  /**
+   * Create Booking
+   */
   it("Ensure CREATE BOOKING API is successfully working", async () => {
-    const responseCreateBooking = await restfulBooker.createBooking(
-      data.CREATE_BOOKING
-    );
+    const responseCreateBooking = await restfulBooker.createBooking(data.CREATE_BOOKING);
 
     assert.equal(responseCreateBooking.status, 200);
     assert.containsAllKeys(responseCreateBooking.data, ["bookingid"]);
@@ -66,41 +67,45 @@ describe("RESTFUL BOOKER END TO END", () => {
     bookingId = responseCreateBooking.data.bookingid;
   });
 
-  /*
-        Get Booking
-  */
+  /**
+   * Get Booking
+   */
   it("Ensure GET BOOKING BY ID API is successfully working", async () => {
     const param = bookingId;
     const responseGetBookingById = await restfulBooker.getBookingByID(param);
+
     assert.equal(responseGetBookingById.status, 200);
     console.log(responseGetBookingById.data.firstname);
     firstName = responseGetBookingById.data.firstname;
   });
 
-  //Get Booking by First Name
-
+  /**
+   * Get Booking by Firstname
+   */
   it("Ensure GET BOOKING BY FIRST NAME API is successfully working", async () => {
-    const responseGetBookingByFirstName =
-      await restfulBooker.getBookingByFirstName(firstName);
+    const responseGetBookingByFirstName = await restfulBooker.getBookingByFirstName(firstName);
+    
     assert.equal(responseGetBookingByFirstName.status, 200);
     console.log(responseGetBookingByFirstName.data[0].bookingid);
     assert.isArray(responseGetBookingByFirstName.data);
     assert.equal((await restfulBooker.getBookingByID(responseGetBookingByFirstName.data[0].bookingid)).data.firstname,firstName);
   });
     
-  /*
-        Update Booking
-    */
+  /**
+   * Update Booking
+   */
   it("Ensure UPDATE BOOKING API is working", async () => {
     const responseUpdateBooking = await restfulBooker.updateBooking(
       bookingId,
       data.UPDATE_BOOKING
     );
+
     assert.equal(responseUpdateBooking.status, 200);
     assert.equal(
       responseUpdateBooking.data.firstname,
       data.UPDATE_BOOKING.firstname
     );
+
     console.log(responseUpdateBooking.data.firstname);
     assert.containsAllKeys(responseUpdateBooking.data, [
       "firstname",
@@ -112,32 +117,37 @@ describe("RESTFUL BOOKER END TO END", () => {
     ]);
   });
 
-  // Update booking without token
-
   it("Ensure UPDATE BOOKING API without token failed", async () => {
     const responseUpdateBooking = await restfulBooker.updateBookingwithouttoken(
       bookingId,
       data.UPDATE_BOOKING
     );
+
     assert.equal(responseUpdateBooking.status, 403);
     assert.equal(responseUpdateBooking.data, "Forbidden");
   });
 
-  // Delete Booking
-
+  /**
+   * Delete Booking
+   */
   it("Ensure DELETE BOOKING API is working", async () => {
     const responseDeleteBooking = await restfulBooker.deleteBooking(bookingId);
+
     assert.equal(responseDeleteBooking.status, 201);
     assert.equal(responseDeleteBooking.data, "Created");
   });
 
-  //Update Booking with unregistered booking id
-  //Booking id was deleted by the test before
+  /**
+   * Update Booking with unregistered booking id
+   * Booking id was deleted by the test before
+   */
   it("Ensure UPDATE BOOKING API with unregistered booking id failed", async () => {
     const responseUpdateBooking = await restfulBooker.updateBooking(
       bookingId,
       data.UPDATE_BOOKING
     );
+    
     assert.equal(responseUpdateBooking.status, 405);
   });
+  
 });
