@@ -16,7 +16,7 @@
   "scripts": {
     "postinstall": "link-module-alias",
     "preinstall": "command -v link-module-alias && link-module-alias clean || true",
-    "mocha:run": "mocha tests/scenarios --reporter-options resportDir=reports --timeout=10000"
+    "mocha:run": "mocha tests/scenarios/ping-check.js tests/scenarios --reporter-options resportDir=reports --timeout=10000"
   },
   "_moduleAliases": {
     "$root": "tests",
